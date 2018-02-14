@@ -19,7 +19,7 @@ template <class T>
  * Precondition:  name, list, and out are valid
  * Postcondition: The data elements of the list are printed to out
  */
-void printList(string name, const myList<T>& list, ostream& out = cout);
+void printList(string name, myList<T>& list, ostream& out = cout);
 
 /*
  * Description:   Prints a horizontal rule
@@ -258,7 +258,6 @@ int main()
     printList("list2", list2);
     printRule();
 
-
     //Several alternating popFronts and popBacks
     cout << "Testing several alternating popFront and popBack calls..."
          << endl;
@@ -353,30 +352,14 @@ int main()
          << endl;
     printRule();
 
-    //Test full on a full list
-    cout << "Testing full method on a list with 20 elements (arbitrary max)..."
+    //Test full on a list that is not empty or full
+    cout << "Testing full method on a list with multiple elements..."
          << endl;
 
     for(int i = 0; i < 17; i++)
     {
         list4.pushFront(i);
     }
-
-    printList("list4", list4);
-    cout << "The number of elements in list4 is " << list4.getSize() << "."
-         << endl;
-    cout << "list4 is..." << endl;
-
-    if(list4.full())
-        cout << "full" << endl;
-    else
-        cout << "not full" << endl;
-
-    printRule();
-
-    //Test full on a list that is not empty or full
-    cout << "Testing full method on a list with < 20 but > 0 elements..."
-         << endl;
 
     try {
         list4.popFront();
@@ -678,7 +661,7 @@ int main()
 
 //Function implementation
 template <class T>
-void printList(string name, const myList<T>& list, ostream& out)
+void printList(string name, myList<T>& list, ostream& out)
 {
 
     //Print label

@@ -16,9 +16,6 @@
 
 using namespace std;
 
-const auto MAXELEMENTS = 20; //Arbitrary maximum number of nodes to a list
-                             //for myList::full() method
-
 template <class T>
 struct node
 {
@@ -159,7 +156,7 @@ public:
      * Postcondition: The list is unchanged, but if the list is empty or index
      *                  is out of bounds, a BADINDEX exception is thrown
      */
-    T& operator [] (int index) const throw(BADINDEX);
+    T& operator [] (int index) throw(BADINDEX);
 
     /*
      * Description:   Deletes all nodes in the list
@@ -210,11 +207,18 @@ myList<T>:: ~myList ()
 template <class T>
 myList<T>:: myList (const myList<T>& that)
 {
+    //Set this list's head and tail to nullptr
+    this->head = nullptr;
+    this->tail = nullptr;
+
     //If that is not empty, make this list a copy of that
     if(!that.empty())
     {
         //Create an initial node and a pointer for traversing this list
-        auto scanThis = this->head = new node<T>(that[0]);
+        auto scanThis = this->head = new node<T>(that.head->data);
+
+        //Create a pointer for traversing that list
+        auto scanThat = that.head->next;
 
         //Set the tail to the head
         this->tail = this->head;
@@ -223,13 +227,14 @@ myList<T>:: myList (const myList<T>& that)
         for(int i = 1; i < that.getSize(); i++)
         {
             //Create a new node as a copy of the one in that
-            scanThis->next = new node<T>(that[i]);
+            scanThis->next = new node<T>(scanThat->data);
 
             //Set the new node's back pointer
             scanThis->next->back = scanThis;
 
-            //Move scan pointer forward
+            //Move scan pointers forward
             scanThis = scanThis->next;
+            scanThat = scanThat->next;
 
             //Make the new node the new tail
             this->tail = scanThis;
@@ -240,56 +245,22 @@ myList<T>:: myList (const myList<T>& that)
 
         //Set the head's back pointer to the tail
         this->head->back = this->tail;
-    }
-
-    //If that is empty, set this list's head and tail to nullptr
-    else
-    {
-        this->head = nullptr;
-        this->tail = nullptr;
     }
 }
 
 template <class T>
 myList<T>:: myList (myList<T>&& that) noexcept
 {
-    //If that is not empty, make this list a copy of that
+    //Set this list's head and tail to nullptr
+    this->head = nullptr;
+    this->tail = nullptr;
+
+    //If that is not empty, swap this list's head and tail with that list's
     if(!that.empty())
     {
-        //Create an initial node and a pointer for traversing this list
-        auto scanThis = this->head = new node<T>(that[0]);
-
-        //Set the tail to the head
-        this->tail = this->head;
-
-        //Traverse that until its tail is reached while copying its contents
-        for(int i = 1; i < that.getSize(); i++)
-        {
-            //Create a new node as a copy of the one in that
-            scanThis->next = new node<T>(that[i]);
-
-            //Set the new node's back pointer
-            scanThis->next->back = scanThis;
-
-            //Move scan pointer forward
-            scanThis = scanThis->next;
-
-            //Make the new node the new tail
-            this->tail = scanThis;
-        }
-
-        //Set the tail's next pointer to the head
-        this->tail->next = this->head;
-
-        //Set the head's back pointer to the tail
-        this->head->back = this->tail;
-    }
-
-    //If that is empty, set this list's head and tail to nullptr
-    else
-    {
-        this->head = nullptr;
-        this->tail = nullptr;
+        //Swap the adresses of the head and tail of each list
+        swap(this->head, that.head);
+        swap(this->tail, that.tail);
     }
 }
 
@@ -489,10 +460,20 @@ int myList<T>:: getSize () const
 template <class T>
 bool myList<T>:: full () const
 {
-    //If the size is greater than or equal to the arbitrary maximum, return
-    //true; otherwise, return false
-    return this->getSize() >= MAXELEMENTS;
+    //Attempt to allocate memory from the heap
+    try {
+        auto temp = new node<int>(1);
+        delete temp;
+    }
 
+    //If exception thrown, return true
+    catch(bad_alloc& b)
+    {
+        return true;
+    }
+
+    //If successful, return false
+    return false;
 }
 
 template <class T>
@@ -525,7 +506,7 @@ T myList<T>:: back() const throw(BADINDEX)
 }
 
 template <class T>
-T& myList<T>:: operator [] (int index) const throw(BADINDEX)
+T& myList<T>:: operator [] (int index) throw(BADINDEX)
 {
     //If the list is empty, throw a BADINDEX exception
     if(this->empty())
@@ -589,15 +570,21 @@ void myList<T>:: erase ()
 template <class T>
 myList<T>& myList<T>:: operator = (const myList<T>& that)
 {
-    //If that is empty erase this list
-    if(that.empty())
-        this->erase();
+    //If that is the same list, simply return this list
+    if(that.head == this->head)
+        return *this;
+
+    //erase this list
+    this->erase();
 
     //If that is not empty, make this list a copy of that
-    else
+    if(!that.empty())
     {
         //Create an initial node and a pointer for traversing this list
-        auto scanThis = this->head = new node<T>(that[0]);
+        auto scanThis = this->head = new node<T>(that.head->data);
+
+        //Create a pointer for traversing that list
+        auto scanThat = that.head->next;
 
         //Set the tail to the head
         this->tail = this->head;
@@ -606,13 +593,14 @@ myList<T>& myList<T>:: operator = (const myList<T>& that)
         for(int i = 1; i < that.getSize(); i++)
         {
             //Create a new node as a copy of the one in that
-            scanThis->next = new node<T>(that[i]);
+            scanThis->next = new node<T>(scanThat->data);
 
             //Set the new node's back pointer
             scanThis->next->back = scanThis;
 
-            //Move scan pointer forward
+            //Move scan pointers forward
             scanThis = scanThis->next;
+            scanThat = scanThat->next;
 
             //Make the new node the new tail
             this->tail = scanThis;
@@ -632,44 +620,9 @@ myList<T>& myList<T>:: operator = (const myList<T>& that)
 template <class T>
 myList<T>& myList<T>:: operator = (myList<T>&& that) noexcept
 {
-    //If that is empty erase this list
-    if(that.empty())
-        this->erase();
-
-    //If that is not empty, make this list a copy of that
-    else
-    {
-        //Create an initial node and a pointer for traversing this list
-        auto scanThis = this->head = new node<T>(that[0]);
-
-        //Set the tail to the head
-        this->tail = this->head;
-
-        //Traverse that until its tail is reached while copying its contents
-        for(int i = 1; i < that.getSize(); i++)
-        {
-            //Create a new node as a copy of the one in that
-            scanThis->next = new node<T>(that[i]);
-
-            //Set the new node's back pointer
-            scanThis->next->back = scanThis;
-
-            //Move scan pointer forward
-            scanThis = scanThis->next;
-
-            //Make the new node the new tail
-            this->tail = scanThis;
-        }
-
-        //Set the tail's next pointer to the head
-        this->tail->next = this->head;
-
-        //Set the head's back pointer to the tail
-        this->head->back = this->tail;
-    }
-
-    //Return the calling list
-    return *this;
+    //Swap the adresses of the head and tail of each list
+    swap(this->head, that.head);
+    swap(this->tail, that.tail);
 }
 
 #endif //MYLINKEDLIST_MYLIST_H

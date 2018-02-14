@@ -16,7 +16,7 @@ public:
     virtual bool empty() const                                    =0;
     virtual T    front() const                   throw (BADINDEX) =0;
     virtual T    back() const                    throw (BADINDEX) =0;
-    virtual T&   operator [](int) const               throw (BADINDEX) =0;
+    virtual T&   operator [](int)               throw (BADINDEX) =0;
     virtual void erase()                                          =0;
     virtual ~containerInterface(){};
 };
