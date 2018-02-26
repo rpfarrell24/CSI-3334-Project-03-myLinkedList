@@ -6,19 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/Users/RyanFarrell/Documents/CLionProjects/myLinkedList/containerInterface.h
+/Users/RyanFarrell/Documents/CLionProjects/myQueue/containerInterface.h
 
-/Users/RyanFarrell/Documents/CLionProjects/myLinkedList/main.cpp
-myList.h
-/Users/RyanFarrell/Documents/CLionProjects/myLinkedList/myList.h
+/Users/RyanFarrell/Documents/CLionProjects/myQueue/main.cpp
+myQueue.h
+/Users/RyanFarrell/Documents/CLionProjects/myQueue/myQueue.h
 string
 -
 
-/Users/RyanFarrell/Documents/CLionProjects/myLinkedList/myList.h
+/Users/RyanFarrell/Documents/CLionProjects/myQueue/myList.h
 memory
 -
 iostream
 -
 containerInterface.h
-/Users/RyanFarrell/Documents/CLionProjects/myLinkedList/containerInterface.h
+/Users/RyanFarrell/Documents/CLionProjects/myQueue/containerInterface.h
+
+/Users/RyanFarrell/Documents/CLionProjects/myQueue/myQueue.h
+myList.h
+/Users/RyanFarrell/Documents/CLionProjects/myQueue/myList.h
 

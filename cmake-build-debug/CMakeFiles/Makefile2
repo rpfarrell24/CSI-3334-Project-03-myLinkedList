@@ -54,10 +54,10 @@ RM = "/Users/RyanFarrell/Library/Application Support/JetBrains/Toolbox/apps/CLio
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/RyanFarrell/Documents/CLionProjects/myLinkedList
+CMAKE_SOURCE_DIR = /Users/RyanFarrell/Documents/CLionProjects/myQueue
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/RyanFarrell/Documents/CLionProjects/myLinkedList/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/RyanFarrell/Documents/CLionProjects/myQueue/cmake-build-debug
 
 #=============================================================================
 # Target rules for target CMakeFiles/myLinkedList.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /Users/RyanFarrell/Documents/CLionProjects/myLinkedList/cmake
 CMakeFiles/myLinkedList.dir/all:
 	$(MAKE) -f CMakeFiles/myLinkedList.dir/build.make CMakeFiles/myLinkedList.dir/depend
 	$(MAKE) -f CMakeFiles/myLinkedList.dir/build.make CMakeFiles/myLinkedList.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/RyanFarrell/Documents/CLionProjects/myLinkedList/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target myLinkedList"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/RyanFarrell/Documents/CLionProjects/myQueue/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target myLinkedList"
 .PHONY : CMakeFiles/myLinkedList.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/myLinkedList.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/myLinkedList.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/RyanFarrell/Documents/CLionProjects/myLinkedList/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/RyanFarrell/Documents/CLionProjects/myQueue/cmake-build-debug/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/myLinkedList.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/RyanFarrell/Documents/CLionProjects/myLinkedList/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/RyanFarrell/Documents/CLionProjects/myQueue/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/myLinkedList.dir/rule
 
 # Convenience name for target.

@@ -1,10 +1,10 @@
 /*
  * Author:                 Ryan Farrell
- * Assignment Title:       myLinkedList
- * Assignment Description: This program implements a linked list class.
- * Due Date:               2018/02/13
- * Date Created:           2018/02/09
- * Date Last Modified:     2018/02/12
+ * Assignment Title:       myQueue
+ * Assignment Description: This program implements a queue class.
+ * Due Date:               02/27/2018
+ * Date Created:           02/25/2018
+ * Date Last Modified:     02/25/2018
  */
 
 #ifndef _LIST
@@ -623,6 +623,9 @@ myList<T>& myList<T>:: operator = (myList<T>&& that) noexcept
     //Swap the adresses of the head and tail of each list
     swap(this->head, that.head);
     swap(this->tail, that.tail);
+
+    //return this list
+    return *this;
 }
 
 #endif //MYLINKEDLIST_MYLIST_H

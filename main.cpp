@@ -1,13 +1,13 @@
 /*
  * Author:                 Ryan Farrell
- * Assignment Title:       myLinkedList
- * Assignment Description: This program implements a linked list class.
- * Due Date:               2018/02/13
- * Date Created:           2018/02/09
- * Date Last Modified:     2018/02/12
+ * Assignment Title:       myQueue
+ * Assignment Description: This program implements a queue class.
+ * Due Date:               2018/02/27
+ * Date Created:           2018/02/25
+ * Date Last Modified:     2018/02/25
  */
 
-#include "myList.h"
+#include "myQueue.h"
 #include <string>
 
 
